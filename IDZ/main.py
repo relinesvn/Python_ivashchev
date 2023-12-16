@@ -28,6 +28,27 @@ def read_matrices_from_json(filename):
     return None
 
 
+def write_result_to_file(result_matrix, output_filename="out.txt"):
+  """
+    Записує результат обчислення до файлу.
+
+    Parameters:
+    result_matrix (np.ndarray): Результат обчислення у форматі NumPy масиву.
+    output_filename (str): Ім'я вихідного файлу.
+
+    Returns:
+    None
+    """
+  try:
+    with open(output_filename, 'w') as file:
+      # Запис результату у файл
+      file.write("Результат обчислення:\n")
+      file.write(str(result_matrix))
+    print(f"Результат записано у файл {output_filename}")
+  except Exception as e:
+    print(f"Помилка при записі результату у файл: {e}")
+
+
 def main():
   # Ім'я файлу з матрицями у форматі JSON
   file_name = "matrix.json"
@@ -59,9 +80,8 @@ def main():
       print("Невірна операція. Завершення програми.")
       return
 
-    # Виведення результату
-    print("\nРезультат:")
-    print(result_matrix)
+    # Запис результату у файл
+    write_result_to_file(result_matrix)
   except ValueError as ve:
     print(f"Помилка: {ve}")
 
